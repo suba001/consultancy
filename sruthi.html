@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .row{
+            height:400px;
+            background-image: url('https://wallpaperaccess.com/full/1979258.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+
+width:100%;
+        }
+        input{
+          border:2px solid brown;
+        }
+    </style>
+  <title>Forms</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+
+<div class="row">
+    
+</div>
+
+<div class="bg">
+<h1 class="text-center">Shree Aakarshana Fashions</h1>
+
+  <!-- <h2>Horizontal form</h2> -->
+  <form class="form-horizontal" action="confirmorder.html">
+    <br>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="name">Name:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="n1" name="name">
+        </div>
+      </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email:</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="n2" name="email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="add">Address:</label>
+      <div class="col-sm-10">          
+        <textarea class="form-control" id="n3" rows="3"></textarea>
+    </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="mobilenum">Mobile Number:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="n4"  name="mob">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="mobilenum">Alternate Mobile Number:</label>
+        <div class="col-sm-10">
+          <input type="number" class="form-control" id="n5"  name="amob">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="date">Starting Date:</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="n6"  name="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="date">Ending Date:</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" id="n7"  name="date">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="date">Time:</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="n9"  name="time">
+        </div>
+      </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox" name="remember">Confirm Your Order</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success" id="b1">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+</div>
+
+<script>
+      
+    const button=document.querySelector("#b1");
+    
+    button.addEventListener('click',()=>{
+    
+    /*const num1=document.querySelector("#t1").value;
+    const num2=document.querySelector("#t2").value*/
+    
+    var data = sessionStorage.getItem("key");
+    var t1 = sessionStorage.getItem("t1");
+    var t2 = sessionStorage.getItem("t2");
+    var total=sessionStorage.getItem("tprice");
+
+    const name=document.querySelector("#n1").value;
+    const email=document.querySelector("#n2").value;
+    const address=document.querySelector("#n3").value;
+    const mob=document.querySelector("#n4").value;
+    const altmob=document.querySelector("#n5").value;
+    const sdate=document.querySelector("#n6").value;
+    const edate=document.querySelector("#n7").value;
+   
+    const time=document.querySelector("#n9").value;
+
+    
+
+
+
+
+    
+    
+
+    
+    if(name==""||email==""||address==""||mob==""||altmob==""||sdate==""||edate==""||time=="")
+    {
+        alert("compulsory");
+    }
+    else{
+        var d=JSON.stringify({id:data,name:name,email:email,address:address,mob:mob,altmob:altmob,sdate:sdate,edate:edate,time:time});
+       
+      fetch("http://localhost:4000/inse",{
+      mode:'cors',
+      method:'POST',
+      headers:{
+          'Content-Type':'application/JSON'
+      },
+      
+         body:d
+     
+    }).then(async(e)=>{
+        const data=await e.json();
+        console.log(data)
+      
+    })
+    .catch((e)=>{
+        alert("eror"+e);
+    })
+  //  alert("inserted");
+
+
+    var d=JSON.stringify({userid:data,username:name,email:email,address:address,mob:mob,altmob:altmob,sdate:sdate,edate:edate,time:time,jid:t1,jname:t2,jprice:total});
+   
+  fetch("http://localhost:4000/adins",{
+  mode:'cors',
+  method:'POST',
+  headers:{
+      'Content-Type':'application/JSON'
+  },
+  
+     body:d
+ 
+}).then(async(e)=>{
+    const data=await e.json();
+    console.log(data)
+    
+})
+.catch((e)=>{
+    alert("eror"+e);
+})
+
+
+
+
+
+
+
+
+    
+    }
+    
+    })
+    </script>
+</body>
+</html>

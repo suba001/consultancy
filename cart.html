@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-image: url('https://wallpapercave.com/wp/wp8422340.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height: 100%;
+width:100%;
+font-family: 'Numans', sans-serif;
+        }
+        table,tr{
+        
+            color:rgb(253, 229, 9);
+           
+        }
+        th{
+            color: rgb(5, 250, 197);
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body onload="fun()">
+
+    <div class="row" style="margin-top:200px;border:2px solid white;">
+        <h1 class="text-center" style="color:white;">Cart</h1>
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6" style="border:1px;height:350px;">
+
+            <table id="res" ></table><br>
+            <h3 style="float:left;color:aquamarine;">total:<h3 id="t" style="color:aquamarine;"></h3></h3>
+            <br><br>
+            <button class="text-center btn btn-primary" onclick="order()">order</button>
+        </div>
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+    
+    <script>
+        function order(){
+            window.location.href="sruthi.html";
+        }
+        function fun(){
+            var data = sessionStorage.getItem("tem");
+
+            var total=sessionStorage.getItem("tprice");
+            if(data=="")
+            {
+                document.getElementById("res").innerHTML="empty";
+            }
+            
+            document.getElementById("res").innerHTML=data;
+            document.getElementById("t").innerHTML=total;
+        }
+    </script>
+</body>
+</html>
